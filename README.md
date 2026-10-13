@@ -64,6 +64,13 @@ O nível exibido é calculado pela soma dos pesos dos achados: baixo abaixo de 3
 médio a partir de 3 e alto a partir de 5. O comportamento e a disponibilidade
 das opções dependem das APIs fornecidas pelo Vencord.
 
+### Mensagens editadas e deduplicação
+
+Achados só são registrados como avisados depois que o risco mínimo é atingido e
+o alerta é enviado. Assim, uma edição que combine achados anteriormente abaixo
+do limite ainda pode gerar um aviso; após o envio, os mesmos achados não geram
+avisos repetidos para essa mensagem.
+
 ## Rede e privacidade
 
 - As verificações de padrões de texto, links e nomes de anexos são feitas no
