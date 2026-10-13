@@ -573,10 +573,6 @@ async function analisarRecebida(message: any, editada: boolean) {
         const novos = achados.filter(a => !ja.has(a.texto));
         if (!novos.length) return;
 
-        for (const a of novos) ja.add(a.texto);
-        avisados.set(completa.id, ja);
-        if (avisados.size > 500) avisados.clear();
-
         const { total, nivel } = nivelDe(novos);
         if (total < Number(settings.store.riscoMinimo)) return;
 
@@ -585,6 +581,10 @@ async function analisarRecebida(message: any, editada: boolean) {
                 `🛡️ **Mensagem de ${completa.author.username ?? "alguém"}${editada ? " (editada)" : ""}, risco ${nivel}**\n` +
                 novos.map(a => a.texto).join("\n")
         });
+
+        for (const a of novos) ja.add(a.texto);
+        avisados.set(completa.id, ja);
+        if (avisados.size > 500) avisados.clear();
     } catch (e) {
         console.warn("[EscudoSeguro] erro ao analisar mensagem:", e);
     }
